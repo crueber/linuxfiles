@@ -1,0 +1,7 @@
+
+autoload -U colors # makes color constants available
+colors
+
+export CLICOLOR=1 # enable colored output from ls, etc
+setopt prompt_subst
+
