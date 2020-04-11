@@ -1,50 +1,32 @@
-thoughtbot dotfiles
+Chris' Linux Files
 ===================
 
-Prerequisites
--------------
+This repo was originally inspired by thoughtbots dotfiles repo. It provides a basic linux environment for comfort and coding.
 
-You need to have the following installed: zsh, oh-my-zsh, vim, ag, tmux, and git.
+## Docker compose files
 
-Install
--------
+These yaml files represent easy ways to set up some common development tools that I like to use.
 
-Clone:
+* `Gitea` is a GitHub like web app that lets you have all of your own repos stored locally and have a nice visual front end. I use it primarily for mirroring and offline work.
+* `Portainer` is used to manage all of my docker containers, because I don't keep all the docker param's in my head.
+* `Traefik` is used as an ingress for docker so that I can use hostnames rather than IPs to communicate with my containers, such at `gitea`.
 
-    git clone git://github.com/crueber/dotfiles.git
-    cd dotfiles
-    ./install.sh
+## Dotfiles, and what's in them.
 
-This will create symlinks for config files in your home directory. 
-
-What's in it?
--------------
-
-[vim](http://www.vim.org/) configuration:
+A [vim](http://www.vim.org/) configuration:
 
 * [Ctrl-P](https://github.com/kien/ctrlp.vim) for fuzzy file/buffer/tag finding.
-* [Rails.vim](https://github.com/tpope/vim-rails) for enhanced navigation of
-  Rails file structure via `gf` and `:A` (alternate), `:Rextract` partials,
-  `:Rinvert` migrations, etc.
-* Run [RSpec](https://www.relishapp.com/rspec) specs from vim.
 * Set `<leader>` to a single space.
 * Switch between the last two files with space-space.
-* Syntax highlighting for CoffeeScript, Textile, Cucumber, Haml, Markdown, and
-  HTML.
-* Use [Ag](https://github.com/ggreer/the_silver_searcher) instead of Grep when
-  available.
+* Syntax highlighting.
+* Use [Ag](https://github.com/ggreer/the_silver_searcher) instead of Grep when available.
 * Use [Exuberant Ctags](http://ctags.sourceforge.net/) for tab completion.
 * Use [Vundle](https://github.com/gmarik/vundle) to manage plugins.
 
-[tmux](http://robots.thoughtbot.com/post/2641409235/a-tmux-crash-course)
-configuration:
+A [tmux](http://robots.thoughtbot.com/post/2641409235/a-tmux-crash-course)
+configuration
 
-* Improve color resolution.
-* Remove administrative debris (session name, hostname, time) in status bar.
-* Set prefix to `Ctrl+a` (like GNU screen).
-* Soften status bar color from harsh green to light gray.
-
-[git](http://git-scm.com/) configuration:
+A [git](http://git-scm.com/) configuration:
 
 * Adds a `create-branch` alias to create feature branches.
 * Adds a `delete-branch` alias to delete feature branches.
@@ -52,25 +34,9 @@ configuration:
 
 Shell aliases and scripts:
 
-* `b` for `bundle`.
-* `g` with no arguments is `git status` and with arguments acts like `git`.
 * `git-churn` to show churn for the files changed in the branch.
-* `load-backup-into development` or `load-backup-into staging` to load latest
-  production database backup into development/staging.
-* `m` for `rake db:migrate && rake db:rollback && rake db:migrate && rake db:test:prepare`.
-* `mcd` to make a directory and change into it.
-* `production backup`, `production migrate`, `production tail`, `watch
-  production ps`, etc. to interact with production Heroku environment. This
-  script also acts as a pass-through so you can do anything with it that you can
-  do with `heroku _______ -r production`.
-* `rake` is `zeus rake` if using [Zeus](https://github.com/burke/zeus) on the
-  project in current directory.
 * `replace foo bar **/*.rb` to find and replace within a given list of files.
-* `rk` for `rake`.
-* `rspec` is `zeus rspec` if using Zeus on the project in current directory.
-* `staging` version of `production` script.
-* `tat` to attach to tmux session named the same as the current directory.
-* `v` for `$VISUAL`.
+* `tmuxdot` to attach to tmux session named the same as the current directory.
 
 Credits
 -------
