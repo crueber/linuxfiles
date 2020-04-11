@@ -1,0 +1,36 @@
+version: '2'
+services:
+  web:
+    image: gitea/gitea:1.8.3
+    volumes:
+      - /mnt/gitea:/data
+    ports:
+      - "3000"
+      - "22"
+    depends_on:
+      - db
+    restart: unless-stopped
+    networks:
+      - default
+      - web
+    labels:
+      - "traefik.frontend.rule=Host:git.home.packden.us"
+      - "traefik.port=3000"
+      - "traefik.enable=true"
+      - "traefik.backend=gitea"
+      - "traefik.docker.network=web"
+  db:
+    image: mariadb:10
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=c132asf56as4f3a435sdf324sa3f
+      - MYSQL_DATABASE=gitea
+      - MYSQL_USER=gitea
+      - MYSQL_PASSWORD=blatheringblatherskite
+    volumes:
+      - /mnt/gitea/mysql:/var/lib/mysql
+
+networks:
+  web:
+    external:
+      name: web

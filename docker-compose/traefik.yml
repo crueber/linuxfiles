@@ -1,0 +1,35 @@
+version: '2'
+
+services:
+  traefik:
+    image: traefik:latest
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+      - 8080:8080
+    networks:
+      - web
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /opt/traefik/traefik.toml:/traefik.toml
+      - /opt/traefik/acme.json:/acme.json
+    container_name: traefik
+    labels:
+      - "traefik.frontend.auth.basic.users=crueber:$$apr1$$JtB3wawM$$/lqcQxgGcFDUNTVGWiYhA0"
+      - "traefik.backend=traefik"
+      - "traefik.backends.backend1.servers.server1.url=http://192.168.1.123:5000"
+      - "traefik.docker.network=web"
+      - "traefik.enable=true"
+      - "traefik.frontend.rule=Host:traefik.home.packden.us"
+      - "traefik.frontends.frontend1.backend=backend1"
+      - "traefik.frontends.frontend1.entryPoints=['http']"
+      - "traefik.frontends.frontend1.passHostHeader=true"
+      - "traefik.frontends.frontend1.routes.route0.rule=Host:store.home.packden.us"
+      - "traefik.port=8080"
+
+networks:
+  web:
+    external:
+      name: web
+
