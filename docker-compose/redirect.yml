@@ -1,0 +1,41 @@
+version: '2'
+services:
+  packden:
+    image: cryptkiddie2/redirector:latest
+    ports:
+      - "80"
+    restart: unless-stopped
+    networks:
+      - web
+    environment:
+      - dest=https://git.home.packden.us
+      - access_log=on
+      - keep_uri=true
+    labels:
+      - "traefik.frontend.rule=Host:packden.us"
+      - "traefik.port=80"
+      - "traefik.enable=true"
+      - "traefik.backend=redirect-packden"
+      - "traefik.docker.network=web"  
+  home.packden:
+    image: cryptkiddie2/redirector:latest
+    ports:
+      - "80"
+    restart: unless-stopped
+    networks:
+      - web
+    environment:
+      - dest=https://git.home.packden.us
+      - access_log=on
+      - keep_uri=true
+    labels:
+      - "traefik.frontend.rule=Host:home.packden.us"
+      - "traefik.port=80"
+      - "traefik.enable=true"
+      - "traefik.backend=redirect-home"
+      - "traefik.docker.network=web"
+
+networks:
+  web:
+    external:
+      name: web

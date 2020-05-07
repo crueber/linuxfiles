@@ -1,12 +1,12 @@
 version: '2'
 services:
   portainer:
-    image: portainer/portainer
+    image: portainer/portainer:1.23.2
     volumes:
       - portainer_d:/data
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
-      - "9000"
+      - 9000:9000
     restart: always
     networks:
       - web
@@ -16,7 +16,7 @@ services:
       - "traefik.enable=true"
       - "traefik.backend=portainer"
       - "traefik.docker.network=web"
-
+      
 networks:
   web:
     external:

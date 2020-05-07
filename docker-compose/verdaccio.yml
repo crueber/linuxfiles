@@ -1,0 +1,24 @@
+version: '2'
+
+services:
+  npm:
+    image: verdaccio/verdaccio:4
+    ports:
+      - 4873
+    volumes:
+      - verdaccio:/verdaccio
+    restart: unless-stopped
+    networks:
+      - default
+      - web
+    labels:
+      - "traefik.frontend.rule=Host:npm.home.packden.us"
+      - "traefik.port=4873"
+      - "traefik.enable=true"
+      - "traefik.backend=npm"
+      - "traefik.docker.network=web"
+
+networks:
+  web:
+    external:
+      name: web
